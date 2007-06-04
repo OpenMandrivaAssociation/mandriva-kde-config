@@ -1,20 +1,19 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070405
+%define source_date 20070604
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
-Version:	2007.1
-Release:	%mkrel 25
+Version: 2008.0
+Release: %mkrel 1
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
-Source1: updatekdeprofile
-Source2:	mdv-startup.wav
-Source3:	buyit.desktop
-Source4:	subscribe.desktop
-Source5:	jam.desktop
-License:	GPL
+Source2: mdv-startup.wav
+Source3: buyit.desktop
+Source4: subscribe.desktop
+Source5: jam.desktop
+License: GPL
 BuildArch: noarch
 
 %description
@@ -26,6 +25,7 @@ This package regroups all specific Mandriva config file for KDE.
 %package common
 Group: Graphical desktop/KDE
 Summary: common configs used for Mandriva theme
+Requires(pre): update-alternatives
 
 %description common
 common configs used for Mandriva theme
@@ -35,8 +35,6 @@ common configs used for Mandriva theme
 %dir %_localstatedir/mandriva/
 %dir %_localstatedir/mandriva/kde-profiles/common
 %_localstatedir/mandriva/kde-profiles/common/*
-%attr(0755,root,root) %_bindir/updatekdeprofile
-%config(noreplace ) %_sysconfdir/kderc
 %_datadir/sounds/mdv-startup.wav
 %_datadir/services/searchproviders/jam.desktop
 
@@ -57,13 +55,11 @@ Requires(preun): mandriva-kde-config-common
 %description -n discovery-kde-config
 This package regroups all specific Mandriva config file for KDE.
 
-%posttrans -n discovery-kde-config
-updatekdeprofile --add %_localstatedir/mandriva/kde-profiles/discovery
+%post -n discovery-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/discovery/kderc 10
 
 %preun -n discovery-kde-config
-if [ -x /usr/bin/updatekdeprofile ]; then
-	updatekdeprofile --remove %_localstatedir/mandriva/kde-profiles/discovery
-fi
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/discovery/kderc
 
 %files -n discovery-kde-config
 %defattr(0644,root,root,755)
@@ -84,16 +80,14 @@ Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
 Obsoletes: mandriva-kde-config-file
 Requires(preun): mandriva-kde-config-common
 
-%description -n powerpack-kde-config
-This package regroups all specific Mandriva config file for KDE.
-
-%posttrans -n powerpack-kde-config
-updatekdeprofile --add %_localstatedir/mandriva/kde-profiles/powerpack
+%post -n powerpack-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpack/kderc 10
 
 %preun -n powerpack-kde-config
-if [ -x /usr/bin/updatekdeprofile ]; then
-	updatekdeprofile --remove %_localstatedir/mandriva/kde-profiles/powerpack
-fi
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpack/kderc
+
+%description -n powerpack-kde-config
+This package regroups all specific Mandriva config file for KDE.
 
 %files -n powerpack-kde-config
 %defattr(0644,root,root,755)
@@ -117,13 +111,11 @@ Requires(preun): mandriva-kde-config-common
 %description -n powerpackplus-kde-config
 This package regroups all specific Mandriva config file for KDE.
 
-%posttrans -n powerpackplus-kde-config
-updatekdeprofile --add %_localstatedir/mandriva/kde-profiles/powerpackplus
+%post -n powerpackplus-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpackplus/kderc 10
 
 %preun -n powerpackplus-kde-config
-if [ -x /usr/bin/updatekdeprofile ]; then
-	updatekdeprofile --remove %_localstatedir/mandriva/kde-profiles/powerpackplus
-fi
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpackplus/kderc
 
 %files -n powerpackplus-kde-config
 %defattr(0644,root,root,755)
@@ -147,13 +139,11 @@ Requires(preun): mandriva-kde-config-common
 %description -n one-kde-config
 This package regroups all specific Mandriva config file for KDE.
 
-%posttrans -n one-kde-config
-updatekdeprofile --add %_localstatedir/mandriva/kde-profiles/one
+%post -n one-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/one/kderc 10
 
 %preun -n one-kde-config
-if [ -x /usr/bin/updatekdeprofile ]; then
-	updatekdeprofile --remove %_localstatedir/mandriva/kde-profiles/one
-fi
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/one/kderc
 
 %files -n one-kde-config
 %defattr(0644,root,root,755)
@@ -161,6 +151,7 @@ fi
 %_localstatedir/mandriva/kde-profiles/one/*
 
 %_datadir/apps/kdesktop/DesktopLinks/*.desktop
+
 #--------------------------------------------------------------------
 
 %package -n free-kde-config
@@ -177,17 +168,14 @@ Requires(preun): mandriva-kde-config-common
 Obsoletes: download-kde-config-2007 <= 18mdv2007.0 
 Provides:	download-kde-config-2007
 
-
 %description -n free-kde-config
 This package regroups all specific Mandriva config file for KDE.
 
-%posttrans -n free-kde-config
-updatekdeprofile --add %_localstatedir/mandriva/kde-profiles/free
+%post -n free-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/free/kderc 10
 
 %preun -n free-kde-config
-if [ -x /usr/bin/updatekdeprofile ]; then
-	updatekdeprofile --remove %_localstatedir/mandriva/kde-profiles/free
-fi
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/free/kderc
 
 %files -n free-kde-config
 %defattr(0644,root,root,755)
@@ -195,7 +183,6 @@ fi
 %_localstatedir/mandriva/kde-profiles/free/*
 
 %_datadir/apps/kdesktop/DesktopLinks/*.desktop
-
 
 #--------------------------------------------------------------------
 # KDM
@@ -253,12 +240,6 @@ mkdir -p %buildroot/%_localstatedir/mandriva
 mv kde-profiles %buildroot/%_localstatedir/mandriva
 mv kdm %buildroot/%_sysconfdir/kde
 
-# kdm migration
-install -d -m 0755 %buildroot/%_bindir
-
-# updatekdeprofiles
-install -m 0755 %SOURCE1 %buildroot/%_bindir/updatekdeprofile
-
 install -d -m 0755 %buildroot/%_datadir/sounds/
 install -m 0644 %SOURCE2 %buildroot/%_datadir/sounds/
 
@@ -269,27 +250,11 @@ install -m 0644 %SOURCE4 %buildroot/%_datadir/apps/kdesktop/DesktopLinks/
 install -d -m 0755 %buildroot/%_datadir/services/searchproviders/
 install -m 0644 %SOURCE5 %buildroot/%_datadir/services/searchproviders/
 
-# We symlink all not specific configs from common
-CFGDIR="%_localstatedir/mandriva/kde-profiles"
-pushd %buildroot/${CFGDIR}
-for config in discovery powerpack powerpackplus one free; do
-   pushd common
-      find . -type d -exec mkdir -p ../${config}/{} \;
-   popd
-   find common -type f | while read common; do
-      dest=`echo ${common} | sed "s,common,${config},g"`
-      [ ! -f "$dest" ] && ln -sf "$CFGDIR/$common" "$dest"
-   done
+
+for name in discovery free one powerpack powerpackplus; do
+    echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
+    echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
 done
-
-# Create empty kderc
-install -d 0755 %buildroot/%_sysconfdir/
-cat << EOF > %buildroot/%_sysconfdir/kderc
-[Directories-default]
-prefixes=
-EOF
-chmod 0644 %buildroot/%_sysconfdir/kderc
-
 
 %clean
 rm -rf %buildroot
