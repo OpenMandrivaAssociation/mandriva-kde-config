@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 1
+Release: %mkrel 2
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -29,6 +29,12 @@ Requires(pre): update-alternatives
 
 %description common
 common configs used for Mandriva theme
+
+%post common
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/common/upstream-kde-config 9
+
+%preun common
+update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/common/upstream-kde-config
 
 %files common
 %defattr(0644,root,root,755)
@@ -255,6 +261,10 @@ for name in discovery free one powerpack powerpackplus; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
     echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
 done
+
+# Upstream
+echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
+echo "prefixes=/etc/kde" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
 
 %clean
 rm -rf %buildroot
