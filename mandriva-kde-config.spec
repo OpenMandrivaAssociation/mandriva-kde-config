@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 2
+Release: %mkrel 3
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -33,8 +33,10 @@ common configs used for Mandriva theme
 %post common
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/common/upstream-kde-config 9
 
-%preun common
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/common/upstream-kde-config
+%postun common
+if ! [ -e /var/lib/mandriva/kde-profiles/common/upstream-kde-config ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/common/upstream-kde-config
+fi
 
 %files common
 %defattr(0644,root,root,755)
@@ -64,8 +66,10 @@ This package regroups all specific Mandriva config file for KDE.
 %post -n discovery-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/discovery/kderc 10
 
-%preun -n discovery-kde-config
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/discovery/kderc
+%postun -n discovery-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/discovery/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/discovery/kderc
+fi
 
 %files -n discovery-kde-config
 %defattr(0644,root,root,755)
@@ -89,8 +93,10 @@ Requires(preun): mandriva-kde-config-common
 %post -n powerpack-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpack/kderc 10
 
-%preun -n powerpack-kde-config
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpack/kderc
+%postun -n powerpack-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/powerpack/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpack/kderc
+fi
 
 %description -n powerpack-kde-config
 This package regroups all specific Mandriva config file for KDE.
@@ -120,8 +126,10 @@ This package regroups all specific Mandriva config file for KDE.
 %post -n powerpackplus-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpackplus/kderc 10
 
-%preun -n powerpackplus-kde-config
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpackplus/kderc
+%postun -n powerpackplus-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/powerpackplus/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpackplus/kderc
+fi
 
 %files -n powerpackplus-kde-config
 %defattr(0644,root,root,755)
@@ -148,8 +156,10 @@ This package regroups all specific Mandriva config file for KDE.
 %post -n one-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/one/kderc 10
 
-%preun -n one-kde-config
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/one/kderc
+%postun -n one-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/one/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/one/kderc
+fi
 
 %files -n one-kde-config
 %defattr(0644,root,root,755)
@@ -180,8 +190,10 @@ This package regroups all specific Mandriva config file for KDE.
 %post -n free-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/free/kderc 10
 
-%preun -n free-kde-config
-update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/free/kderc
+%postun -n free-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/free/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/free/kderc
+fi
 
 %files -n free-kde-config
 %defattr(0644,root,root,755)
