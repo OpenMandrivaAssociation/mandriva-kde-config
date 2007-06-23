@@ -13,6 +13,7 @@ Source2: mdv-startup.wav
 Source3: buyit.desktop
 Source4: subscribe.desktop
 Source5: jam.desktop
+Patch0:  mandriva-kde-config-2008.0-fix-bug-10638.patch
 License: GPL
 BuildArch: noarch
 
@@ -248,6 +249,7 @@ fi
 
 %prep
 %setup -q
+%patch0 -p0
 
 %install
 rm -rf %buildroot
