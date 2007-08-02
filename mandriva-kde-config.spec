@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070604
+%define source_date 20070802
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 3
+Release: %mkrel 4
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -13,7 +13,6 @@ Source2: mdv-startup.wav
 Source3: buyit.desktop
 Source4: subscribe.desktop
 Source5: jam.desktop
-Patch0:  mandriva-kde-config-2008.0-fix-bug-10638.patch
 License: GPL
 BuildArch: noarch
 
@@ -249,7 +248,6 @@ fi
 
 %prep
 %setup -q
-%patch0 -p0
 
 %install
 rm -rf %buildroot
