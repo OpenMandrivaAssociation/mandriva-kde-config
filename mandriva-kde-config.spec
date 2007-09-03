@@ -1,18 +1,15 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070806
+%define source_date 20070903
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 5
+Release: %mkrel 7
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
-Source2: mdv-startup.wav
-Source3: buyit.desktop
-Source4: subscribe.desktop
-Source5: jam.desktop
+Source1: mdv-startup.wav
 License: GPL
 BuildArch: noarch
 
@@ -44,37 +41,6 @@ fi
 %dir %_localstatedir/mandriva/kde-profiles/common
 %_localstatedir/mandriva/kde-profiles/common/*
 %_datadir/sounds/mdv-startup.wav
-%_datadir/services/searchproviders/jam.desktop
-
-#--------------------------------------------------------------------
-
-%package -n discovery-kde-config
-Summary: Mandriva KDE configuration 
-Group: Graphical desktop/KDE
-Provides: kde-config-file = %version-%release
-Requires: mandriva-theme
-Requires: mandriva-kde-icons
-Requires(pre): mandriva-kde-config-common = %version-%release
-Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
-Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
-Obsoletes: mandriva-kde-config-file
-Requires(preun): mandriva-kde-config-common
-
-%description -n discovery-kde-config
-This package regroups all specific Mandriva config file for KDE.
-
-%post -n discovery-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/discovery/kderc 10
-
-%postun -n discovery-kde-config
-if ! [ -e /var/lib/mandriva/kde-profiles/discovery/kderc ]; then
-  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/discovery/kderc
-fi
-
-%files -n discovery-kde-config
-%defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/discovery
-%_localstatedir/mandriva/kde-profiles/discovery/*
 
 #--------------------------------------------------------------------
 
@@ -83,11 +49,12 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
-Requires: mandriva-kde-icons
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
 Obsoletes: mandriva-kde-config-file
+Obsoletes: powerpackplus-kde-config
+Obsoletes: discovery-kde-config
 Requires(preun): mandriva-kde-config-common
 
 %post -n powerpack-kde-config
@@ -108,42 +75,11 @@ This package regroups all specific Mandriva config file for KDE.
 
 #--------------------------------------------------------------------
 
-%package -n powerpackplus-kde-config
-Summary: Mandriva KDE configuration 
-Group: Graphical desktop/KDE
-Provides: kde-config-file = %version-%release
-Requires: mandriva-theme
-Requires: mandriva-kde-icons
-Requires(pre): mandriva-kde-config-common = %version-%release
-Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
-Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
-Obsoletes: mandriva-kde-config-file
-Requires(preun): mandriva-kde-config-common
-
-%description -n powerpackplus-kde-config
-This package regroups all specific Mandriva config file for KDE.
-
-%post -n powerpackplus-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpackplus/kderc 10
-
-%postun -n powerpackplus-kde-config
-if ! [ -e /var/lib/mandriva/kde-profiles/powerpackplus/kderc ]; then
-  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/powerpackplus/kderc
-fi
-
-%files -n powerpackplus-kde-config
-%defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/powerpackplus
-%_localstatedir/mandriva/kde-profiles/powerpackplus/*
-
-#--------------------------------------------------------------------
-
 %package -n one-kde-config
 Summary: Mandriva KDE configuration 
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
-Requires: mandriva-kde-icons
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
@@ -166,7 +102,6 @@ fi
 %dir %_localstatedir/mandriva/kde-profiles/one
 %_localstatedir/mandriva/kde-profiles/one/*
 
-%_datadir/apps/kdesktop/DesktopLinks/*.desktop
 
 #--------------------------------------------------------------------
 
@@ -175,7 +110,6 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
-Requires: mandriva-kde-icons
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
@@ -200,7 +134,6 @@ fi
 %dir %_localstatedir/mandriva/kde-profiles/free
 %_localstatedir/mandriva/kde-profiles/free/*
 
-%_datadir/apps/kdesktop/DesktopLinks/*.desktop
 
 #--------------------------------------------------------------------
 # KDM
@@ -259,17 +192,9 @@ mv kde-profiles %buildroot/%_localstatedir/mandriva
 mv kdm %buildroot/%_sysconfdir/kde
 
 install -d -m 0755 %buildroot/%_datadir/sounds/
-install -m 0644 %SOURCE2 %buildroot/%_datadir/sounds/
+install -m 0644 %SOURCE1 %buildroot/%_datadir/sounds/
 
-install -d -m 0755 %buildroot/%_datadir/apps/kdesktop/DesktopLinks
-install -m 0644 %SOURCE3 %buildroot/%_datadir/apps/kdesktop/DesktopLinks/
-install -m 0644 %SOURCE4 %buildroot/%_datadir/apps/kdesktop/DesktopLinks/
-
-install -d -m 0755 %buildroot/%_datadir/services/searchproviders/
-install -m 0644 %SOURCE5 %buildroot/%_datadir/services/searchproviders/
-
-
-for name in discovery free one powerpack powerpackplus; do
+for name in free one powerpack; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
     echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
 done
