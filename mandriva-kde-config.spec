@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 10
+Release: %mkrel 11
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -23,6 +23,7 @@ This package regroups all specific Mandriva config file for KDE.
 Group: Graphical desktop/KDE
 Summary: common configs used for Mandriva theme
 Requires(pre): update-alternatives
+Requires: urw-fonts
 
 %description common
 common configs used for Mandriva theme
@@ -175,7 +176,9 @@ fi
 
 %files -n mandriva-kdm-config
 %defattr(0644,root,root,0755)
-%config(noreplace) %_sysconfdir/kde/kdm
+%config(noreplace) %_sysconfdir/kde/kdm/backgroundrc
+%config(noreplace) %_sysconfdir/kde/kdm/kdmrc
+%_sysconfdir/kde/kdm/themes
 
 #---------------------------------------
 
