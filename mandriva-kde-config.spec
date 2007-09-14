@@ -1,15 +1,14 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070911
+%define source_date 20070914
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 13
+Release: %mkrel 14
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
-Source1: mdv-startup.wav
 License: GPL
 BuildArch: noarch
 
@@ -41,7 +40,6 @@ fi
 %dir %_localstatedir/mandriva/
 %dir %_localstatedir/mandriva/kde-profiles/common
 %_localstatedir/mandriva/kde-profiles/common/*
-%_datadir/sounds/mdv-startup.wav
 
 #--------------------------------------------------------------------
 
@@ -193,9 +191,6 @@ mkdir -p %buildroot/%_localstatedir/mandriva
 
 mv kde-profiles %buildroot/%_localstatedir/mandriva
 mv kdm %buildroot/%_sysconfdir/kde
-
-install -d -m 0755 %buildroot/%_datadir/sounds/
-install -m 0644 %SOURCE1 %buildroot/%_datadir/sounds/
 
 for name in free one powerpack; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
