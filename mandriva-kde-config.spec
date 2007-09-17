@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070915
+%define source_date 20070917
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 16
+Release: %mkrel 17
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -48,6 +48,7 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
+Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
@@ -55,6 +56,11 @@ Obsoletes: mandriva-kde-config-file
 Obsoletes: powerpackplus-kde-config
 Obsoletes: discovery-kde-config
 Requires(preun): mandriva-kde-config-common
+
+%pre -n powerpack-kde-config
+if [ -d %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop
+fi
 
 %post -n powerpack-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpack/kderc 10
@@ -79,6 +85,7 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
+Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
@@ -87,6 +94,11 @@ Requires(preun): mandriva-kde-config-common
 
 %description -n one-kde-config
 This package regroups all specific Mandriva config file for KDE.
+
+%pre -n one-kde-config
+if [ -d %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop
+fi
 
 %post -n one-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/one/kderc 10
@@ -109,6 +121,7 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
+Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
@@ -119,6 +132,11 @@ Provides:	download-kde-config-2007
 
 %description -n free-kde-config
 This package regroups all specific Mandriva config file for KDE.
+
+%pre -n free-kde-config
+if [ -d %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop
+fi
 
 %post -n free-kde-config
 update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/free/kderc 10
@@ -195,11 +213,15 @@ mv kdm %buildroot/%_sysconfdir/kde
 for name in free one powerpack; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
     echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
+	# create the symlink to the desktop data
+    mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop
+    ln -s %_datadir/mdk/desktop/$name %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop/Desktop
 done
 
 # Upstream
 echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
 echo "prefixes=/etc/kde" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
+
 
 %clean
 rm -rf %buildroot
