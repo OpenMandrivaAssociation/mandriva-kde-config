@@ -52,9 +52,9 @@ Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
-Obsoletes: mandriva-kde-config-file
-Obsoletes: powerpackplus-kde-config
-Obsoletes: discovery-kde-config
+Obsoletes: mandriva-kde-config-file < 2008.0
+Obsoletes: powerpackplus-kde-config < 2008.0 
+Provides: powerpackplus-kde-config = %version-%release
 Requires(preun): mandriva-kde-config-common
 
 %pre -n powerpack-kde-config
@@ -89,7 +89,7 @@ Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
-Obsoletes: mandriva-kde-config-file
+Obsoletes: mandriva-kde-config-file < 2008.0
 Requires(preun): mandriva-kde-config-common
 
 %description -n one-kde-config
@@ -125,10 +125,12 @@ Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
-Obsoletes: mandriva-kde-config-file
+Obsoletes: mandriva-kde-config-file < 2008.0
 Requires(preun): mandriva-kde-config-common
-Obsoletes: download-kde-config-2007 <= 18mdv2007.0 
+Obsoletes: download-kde-config-2007 < 2008.0 
 Provides:	download-kde-config-2007
+Obsoletes: discovery-kde-config < 2008.0
+Provides: discovery-kde-config = %version-%release
 
 %description -n free-kde-config
 This package regroups all specific Mandriva config file for KDE.
@@ -158,12 +160,12 @@ fi
 %package -n mandriva-kdm-config
 Summary: Mandriva KDM config file
 Group: Graphical desktop/KDE
-Obsoletes: kdebase-kdm-config-file
+Obsoletes: kdebase-kdm-config-file < 2008.0
 Provides: kdm-config-file = %version-%release
 # For upgrade 
 Provides: kdebase-kdm-config-file = 2:%version 
 Conflicts: kdebase-progs <= 3.5.1-15.1.20060mdk
-Obsoletes: mandriva-kde-config-file
+Obsoletes: mandriva-kde-config-file < 2008.0
 Requires(post): perl-MDK-Common
 
 %description -n mandriva-kdm-config
