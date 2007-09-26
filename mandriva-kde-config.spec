@@ -1,5 +1,5 @@
 %define epoch_kdelibs 30000000
-%define source_date 20070925
+%define source_date 20070926
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
@@ -215,7 +215,7 @@ for name in free one powerpack; do
     echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
 	# create the symlink to the desktop data
     mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop
-    ln -s %_datadir/mdk/desktop/$name %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop/Desktop
+    ln -s %_datadir/mdk/desktop/$name %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop/DesktopLinks
 done
 
 # Upstream
