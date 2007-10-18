@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20071002
+%define source_date 20071018
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 28
+Release: %mkrel 29
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -116,6 +116,42 @@ fi
 
 #--------------------------------------------------------------------
 
+%package -n flash-kde-config
+Summary: Mandriva KDE configuration 
+Group: Graphical desktop/KDE
+Provides: kde-config-file = %version-%release
+Requires: mandriva-theme
+Requires: desktop-common-data
+Requires(pre): mandriva-kde-config-common = %version-%release
+Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
+Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
+Obsoletes: mandriva-kde-config-file < 2008.0
+Requires(preun): mandriva-kde-config-common
+
+%description -n flash-kde-config
+This package regroups all specific Mandriva config file for KDE.
+
+%pre -n flash-kde-config
+if [ -d %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop
+fi
+
+%post -n flash-kde-config
+update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/flash/kderc 10
+
+%postun -n flash-kde-config
+if ! [ -e /var/lib/mandriva/kde-profiles/flash/kderc ]; then
+  update-alternatives --remove kde-config /var/lib/mandriva/kde-profiles/flash/kderc
+fi
+
+%files -n flash-kde-config
+%defattr(0644,root,root,755)
+%dir %_localstatedir/mandriva/kde-profiles/flash
+%_localstatedir/mandriva/kde-profiles/flash/*
+
+
+#--------------------------------------------------------------------
+
 %package -n free-kde-config
 Summary: Mandriva KDE configuration 
 Group: Graphical desktop/KDE
@@ -212,7 +248,7 @@ mkdir -p %buildroot/%_localstatedir/mandriva
 mv kde-profiles %buildroot/%_localstatedir/mandriva
 mv kdm %buildroot/%_sysconfdir/kde
 
-for name in free one powerpack; do
+for name in flash free one powerpack; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
     echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
 	# create the symlink to the desktop data
