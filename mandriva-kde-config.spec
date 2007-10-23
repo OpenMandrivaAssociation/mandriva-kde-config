@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20071018
+%define source_date 20071023
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.0
-Release: %mkrel 29
+Release: %mkrel 30
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
