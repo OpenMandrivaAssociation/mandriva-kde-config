@@ -9,6 +9,8 @@ URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
+# (nl) Activate Klipper by default and fix a bug in klipper that add 'gecko' to list of no-action windows
+Patch0:  %{name}-%{version}-activate-klipper.patch
 License: GPL
 BuildArch: noarch
 
@@ -238,6 +240,7 @@ fi
 
 %prep
 %setup -q
+%patch -p0 
 
 %install
 rm -rf %buildroot
