@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.1
-Release: %mkrel 1
+Release: %mkrel 2
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
