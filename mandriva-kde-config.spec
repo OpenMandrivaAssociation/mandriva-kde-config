@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20071026
+%define source_date 20071213
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration 
 Version: 2008.1
-Release: %mkrel 2
+Release: %mkrel 3
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -58,6 +58,9 @@ Provides: powerpackplus-kde-config = %version-%release
 Requires(preun): mandriva-kde-config-common
 
 %pre -n powerpack-kde-config
+if [ "$1" = "2" ]; then
+	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
+fi
 if [ -d %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop ]; then
   rm -rf %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop
 fi
@@ -96,6 +99,9 @@ Requires(preun): mandriva-kde-config-common
 This package regroups all specific Mandriva config file for KDE.
 
 %pre -n one-kde-config
+if [ "$1" = "2" ]; then
+	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
+fi
 if [ -d %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop ]; then
   rm -rf %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop
 fi
@@ -132,6 +138,9 @@ Requires(preun): mandriva-kde-config-common
 This package regroups all specific Mandriva config file for KDE.
 
 %pre -n flash-kde-config
+if [ "$1" = "2" ]; then
+	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
+fi
 if [ -d %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop ]; then
   rm -rf %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop
 fi
@@ -172,6 +181,9 @@ Provides: discovery-kde-config = %version-%release
 This package regroups all specific Mandriva config file for KDE.
 
 %pre -n free-kde-config
+if [ "$1" = "2" ]; then
+	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
+fi
 if [ -d %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop ]; then
   rm -rf %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop
 fi
