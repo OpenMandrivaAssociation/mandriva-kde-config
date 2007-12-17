@@ -7,6 +7,7 @@ Version: 2008.1
 Release: %mkrel 3
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
+BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
 License: GPL
 BuildArch: noarch
@@ -55,7 +56,6 @@ Obsoletes: mandriva-kde-config-file < 2008.0
 Obsoletes: powerpackplus-kde-config < 2008.0 
 Provides: powerpackplus-kde-config = %version-%release
 Requires(preun): mandriva-kde-config-common
-Requires: mandriva-release-Powerpack
 
 %pre -n powerpack-kde-config
 if [ "$1" = "2" ]; then
@@ -94,7 +94,6 @@ Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
 Obsoletes: mandriva-kde-config-file < 2008.0
 Requires(preun): mandriva-kde-config-common
-Requires: mandriva-release-One
 
 %description -n one-kde-config
 This package regroups all specific Mandriva config file for KDE.
@@ -134,7 +133,6 @@ Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
 Conflicts: kdebase-common < 1:3.5.2-10.1.20060mdk
 Obsoletes: mandriva-kde-config-file < 2008.0
 Requires(preun): mandriva-kde-config-common
-Requires: mandriva-release-Flash
 
 %description -n flash-kde-config
 This package regroups all specific Mandriva config file for KDE.
@@ -178,7 +176,6 @@ Obsoletes: download-kde-config-2007 < 2008.0
 Provides:	download-kde-config-2007
 Obsoletes: discovery-kde-config < 2008.0
 Provides: discovery-kde-config = %version-%release
-Requires: mandriva-release-Free
 
 %description -n free-kde-config
 This package regroups all specific Mandriva config file for KDE.
