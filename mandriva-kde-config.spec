@@ -7,7 +7,6 @@ Version: 2008.1
 Release: %mkrel 3
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
-BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
 License: GPL
 BuildArch: noarch
