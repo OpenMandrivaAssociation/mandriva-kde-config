@@ -20,7 +20,7 @@ This package regroups all specific Mandriva config file for KDE.
 
 %package common
 Group: Graphical desktop/KDE
-Summary: common configs used for Mandriva theme
+Summary: Common configs used for Mandriva theme
 Requires(pre): update-alternatives
 Requires: urw-fonts
 
