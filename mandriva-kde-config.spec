@@ -1,10 +1,10 @@
 %define epoch_kdelibs 30000000
-%define source_date 20080306
+%define source_date 20080307
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
 Version: 2008.1
-Release: %mkrel 19
+Release: %mkrel 20
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -272,6 +272,12 @@ done
 echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
 echo "prefixes=/etc/kde" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
 
+# Bookmarks
+mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/{free,flash,one,powerpack}/share/apps/konqueror/
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-download.xml %buildroot%_localstatedir/mandriva/kde-profiles/free/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/mandriva/kde-profiles/one/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/mandriva/kde-profiles/flash/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-powerpack.xml %buildroot%_localstatedir/mandriva/kde-profiles/powerpack/share/apps/konqueror/bookmarks.xml
 
 %clean
 rm -rf %buildroot
