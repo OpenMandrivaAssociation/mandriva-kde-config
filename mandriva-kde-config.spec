@@ -4,11 +4,16 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
 Version: 2008.1
-Release: %mkrel 24
+Release: %mkrel 25
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
+# OpenOffice.org icons. Should be in a separate package
+# in the future, since they're shared between kde, OOo
+# and maybe others
+Source1: ooo-icons.tar.bz2
+Source2: opendocument-mime.tar.bz2
 License: GPL
 BuildArch: noarch
 
@@ -249,7 +254,7 @@ fi
 #---------------------------------------
 
 %prep
-%setup -q
+%setup -q -a 1 -a 2
 
 %install
 rm -rf %buildroot
@@ -259,6 +264,40 @@ mkdir -p %buildroot/%_localstatedir/mandriva
 
 mv kde-profiles %buildroot/%_localstatedir/mandriva
 mv kdm %buildroot/%_sysconfdir/kde
+
+# openoffice icons, see #26311
+mkdir -p %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/icons/
+cp -a ooo-icons/hicolor %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/icons/
+
+# openoffice mimetypes, see #26311
+mkdir -p %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
+cp -a opendocument-mime/* %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
+# XXX we have to rename them to the same name provided by kdelibs-common, otherwise the
+# global ones are used.
+pushd %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
+    mv openoffice.org2.4-oasis-drawing.desktop vnd.oasis.opendocument.graphics.desktop
+    mv openoffice.org2.4-oasis-drawing-template.desktop vnd.oasis.opendocument.graphics-template.desktop
+    mv openoffice.org2.4-oasis-master-document.desktop vnd.oasis.opendocument.text-master.desktop
+    mv openoffice.org2.4-oasis-formula.desktop vnd.oasis.opendocument.formula.desktop
+    mv openoffice.org2.4-oasis-spreadsheet.desktop vnd.oasis.opendocument.spreadsheet.desktop
+    mv openoffice.org2.4-oasis-spreadsheet-template.desktop vnd.oasis.opendocument.spreadsheet-template.desktop
+    mv openoffice.org2.4-oasis-text.desktop vnd.oasis.opendocument.text.desktop
+    mv openoffice.org2.4-oasis-text-template.desktop vnd.oasis.opendocument.text-template.desktop
+    mv openoffice.org2.4-oasis-web-template.desktop vnd.oasis.opendocument.text-web.desktop
+    mv openoffice.org2.4-oasis-presentation.desktop vnd.oasis.opendocument.presentation.desktop
+    mv openoffice.org2.4-oasis-presentation-template.desktop vnd.oasis.opendocument.presentation-template.desktop
+    mv openoffice.org2.4-spreadsheet.desktop vnd.sun.xml.calc.desktop
+    mv openoffice.org2.4-spreadsheet-template.desktop vnd.sun.xml.calc.template.desktop
+    mv openoffice.org2.4-presentation.desktop vnd.sun.xml.impress.desktop
+    mv openoffice.org2.4-presentation-template.desktop vnd.sun.xml.impress.template.desktop
+    mv openoffice.org2.4-drawing.desktop  vnd.sun.xml.draw.desktop
+    mv openoffice.org2.4-drawing-template.desktop vnd.sun.xml.draw.template.desktop
+    mv openoffice.org2.4-text.desktop vnd.sun.xml.writer.desktop
+    mv openoffice.org2.4-text-template.desktop vnd.sun.xml.writer.template.desktop
+    mv openoffice.org2.4-master-document.desktop vnd.sun.xml.writer.master.desktop
+    mv openoffice.org2.4-formula.desktop vnd.sun.xml.math.desktop
+popd
+
 
 for name in flash free one powerpack; do
     echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
