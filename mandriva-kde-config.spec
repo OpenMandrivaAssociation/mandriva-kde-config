@@ -1,13 +1,14 @@
 %define epoch_kdelibs 30000000
-%define source_date 20080402
+%define source_date 20080505
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
-Version: 2008.1
-Release: %mkrel 27
+Version: 2009.0
+Release: %mkrel 1
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
+BuildRequires: kde3-macros
 Source0: %{name}-%{version}.%{source_date}.tar.bz2
 # OpenOffice.org icons. Should be in a separate package
 # in the future, since they're shared between kde, OOo
@@ -225,31 +226,13 @@ Requires(post): perl-MDK-Common
 Mandriva KDM config file
 
 %trigger -n mandriva-kdm-config -- kdebase-kdm-config-file 
-perl -MMDK::Common -e 'update_gnomekderc("/etc/kde/kdm/kdmrc", "General", "ConsoleTTYs", "tty1,tty2,tty3,tty4,tty5,tty6", "ServerVTs", "-7")'
-
-%pre -n mandriva-kdm-config
-if [ ! -h "%_datadir/config" ]; then
-   [ ! -d "%_sysconfdir/kde" ] && mkdir -p %_sysconfdir/kde
-   cp -arf %_datadir/config/* %_sysconfdir/kde/
-   rm -rf %_datadir/config
-   ln -s %_sysconfdir/kde %_datadir/config   
-fi
-
-%posttrans -n mandriva-kdm-config
-# Test if the rpm bug was not triggered
-cd %_sysconfdir/kde/kdm
-if [ ! -f kdmrc -a -f kdmrc.rpmsave ]; then
-   mv kdmrc.rpmsave kdmrc
-fi
-if [ ! -f backgroundrc -a -f backgroundrc.rpmsave ]; then
-   mv backgroundrc.rpmsave backgroundrc
-fi
+perl -MMDK::Common -e 'update_gnomekderc("%{_kde3_configdir}/kdm/kdmrc", "General", "ConsoleTTYs", "tty1,tty2,tty3,tty4,tty5,tty6", "ServerVTs", "-7")'
 
 %files -n mandriva-kdm-config
 %defattr(0644,root,root,0755)
-%config(noreplace) %_sysconfdir/kde/kdm/backgroundrc
-%config(noreplace) %_sysconfdir/kde/kdm/kdmrc
-%_sysconfdir/kde/kdm/themes
+%config(noreplace) %_kde3_configdir/kdm/backgroundrc
+%config(noreplace) %_kde3_configdir/kdm/kdmrc
+%_kde3_configdir/kdm/themes
 
 #---------------------------------------
 
@@ -259,11 +242,11 @@ fi
 %install
 rm -rf %buildroot
 # Create profile dirs
-mkdir -p %buildroot/%_sysconfdir/kde
+mkdir -p %buildroot/%{_kde3_configdir}
 mkdir -p %buildroot/%_localstatedir/mandriva
 
 mv kde-profiles %buildroot/%_localstatedir/mandriva
-mv kdm %buildroot/%_sysconfdir/kde
+mv kdm %buildroot/%{_kde3_configdir}
 
 # openoffice icons, see #26311
 mkdir -p %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/icons/
@@ -309,7 +292,7 @@ done
 
 # Upstream
 echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
-echo "prefixes=/etc/kde" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
+echo "prefixes=%{_kde3_prefix}" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
 
 # Bookmarks
 mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/{free,flash,one,powerpack}/share/apps/konqueror/
