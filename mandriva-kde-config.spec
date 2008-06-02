@@ -34,7 +34,7 @@ Requires: urw-fonts
 common configs used for Mandriva theme
 
 %post common
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/common/upstream-kde-config 9
+update-alternatives --install /etc/kderc kde-config %_localstatedir/lib/mandriva/kde-profiles/common/upstream-kde-config 9
 
 %postun common
 if ! [ -e /var/lib/mandriva/kde-profiles/common/upstream-kde-config ]; then
@@ -43,9 +43,9 @@ fi
 
 %files common
 %defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/
-%dir %_localstatedir/mandriva/kde-profiles/common
-%_localstatedir/mandriva/kde-profiles/common/*
+%dir %_localstatedir/lib/mandriva/
+%dir %_localstatedir/lib/mandriva/kde-profiles/common
+%_localstatedir/lib/mandriva/kde-profiles/common/*
 
 #--------------------------------------------------------------------
 
@@ -67,12 +67,12 @@ Requires(preun): mandriva-kde-config-common
 if [ "$1" = "2" ]; then
 	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
 fi
-if [ -d %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop ]; then
-  rm -rf %_localstatedir/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop
+if [ -d %_localstatedir/lib/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/lib/mandriva/kde-profiles/powerpack/share/apps/kdesktop/Desktop
 fi
 
 %post -n powerpack-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/powerpack/kderc 10
+update-alternatives --install /etc/kderc kde-config %_localstatedir/lib/mandriva/kde-profiles/powerpack/kderc 10
 
 %postun -n powerpack-kde-config
 if ! [ -e /var/lib/mandriva/kde-profiles/powerpack/kderc ]; then
@@ -84,8 +84,8 @@ This package regroups all specific Mandriva config file for KDE.
 
 %files -n powerpack-kde-config
 %defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/powerpack
-%_localstatedir/mandriva/kde-profiles/powerpack/*
+%dir %_localstatedir/lib/mandriva/kde-profiles/powerpack
+%_localstatedir/lib/mandriva/kde-profiles/powerpack/*
 
 #--------------------------------------------------------------------
 
@@ -108,12 +108,12 @@ This package regroups all specific Mandriva config file for KDE.
 if [ "$1" = "2" ]; then
 	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
 fi
-if [ -d %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop ]; then
-  rm -rf %_localstatedir/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop
+if [ -d %_localstatedir/lib/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/lib/mandriva/kde-profiles/one/share/apps/kdesktop/Desktop
 fi
 
 %post -n one-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/one/kderc 10
+update-alternatives --install /etc/kderc kde-config %_localstatedir/lib/mandriva/kde-profiles/one/kderc 10
 
 %postun -n one-kde-config
 if ! [ -e /var/lib/mandriva/kde-profiles/one/kderc ]; then
@@ -122,8 +122,8 @@ fi
 
 %files -n one-kde-config
 %defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/one
-%_localstatedir/mandriva/kde-profiles/one/*
+%dir %_localstatedir/lib/mandriva/kde-profiles/one
+%_localstatedir/lib/mandriva/kde-profiles/one/*
 
 
 #--------------------------------------------------------------------
@@ -147,12 +147,12 @@ This package regroups all specific Mandriva config file for KDE.
 if [ "$1" = "2" ]; then
 	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
 fi
-if [ -d %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop ]; then
-  rm -rf %_localstatedir/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop
+if [ -d %_localstatedir/lib/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/lib/mandriva/kde-profiles/flash/share/apps/kdesktop/Desktop
 fi
 
 %post -n flash-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/flash/kderc 10
+update-alternatives --install /etc/kderc kde-config %_localstatedir/lib/mandriva/kde-profiles/flash/kderc 10
 
 %postun -n flash-kde-config
 if ! [ -e /var/lib/mandriva/kde-profiles/flash/kderc ]; then
@@ -161,8 +161,8 @@ fi
 
 %files -n flash-kde-config
 %defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/flash
-%_localstatedir/mandriva/kde-profiles/flash/*
+%dir %_localstatedir/lib/mandriva/kde-profiles/flash
+%_localstatedir/lib/mandriva/kde-profiles/flash/*
 
 
 #--------------------------------------------------------------------
@@ -190,12 +190,12 @@ This package regroups all specific Mandriva config file for KDE.
 if [ "$1" = "2" ]; then
 	[ ! -h %_sysconfdir/kderc ] && rm -f %_sysconfdir/kderc ]
 fi
-if [ -d %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop ]; then
-  rm -rf %_localstatedir/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop
+if [ -d %_localstatedir/lib/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop ]; then
+  rm -rf %_localstatedir/lib/mandriva/kde-profiles/free/share/apps/kdesktop/Desktop
 fi
 
 %post -n free-kde-config
-update-alternatives --install /etc/kderc kde-config %_localstatedir/mandriva/kde-profiles/free/kderc 10
+update-alternatives --install /etc/kderc kde-config %_localstatedir/lib/mandriva/kde-profiles/free/kderc 10
 
 %postun -n free-kde-config
 if ! [ -e /var/lib/mandriva/kde-profiles/free/kderc ]; then
@@ -204,8 +204,8 @@ fi
 
 %files -n free-kde-config
 %defattr(0644,root,root,755)
-%dir %_localstatedir/mandriva/kde-profiles/free
-%_localstatedir/mandriva/kde-profiles/free/*
+%dir %_localstatedir/lib/mandriva/kde-profiles/free
+%_localstatedir/lib/mandriva/kde-profiles/free/*
 
 
 #--------------------------------------------------------------------
@@ -243,21 +243,21 @@ perl -MMDK::Common -e 'update_gnomekderc("%{_kde3_configdir}/kdm/kdmrc", "Genera
 rm -rf %buildroot
 # Create profile dirs
 mkdir -p %buildroot/%{_kde3_configdir}
-mkdir -p %buildroot/%_localstatedir/mandriva
+mkdir -p %buildroot/%_localstatedir/lib/mandriva
 
-mv kde-profiles %buildroot/%_localstatedir/mandriva
+mv kde-profiles %buildroot/%_localstatedir/lib/mandriva
 mv kdm %buildroot/%{_kde3_configdir}
 
 # openoffice icons, see #26311
-mkdir -p %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/icons/
-cp -a ooo-icons/hicolor %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/icons/
+mkdir -p %buildroot/%_localstatedir/lib/mandriva/kde-profiles/common/share/icons/
+cp -a ooo-icons/hicolor %buildroot/%_localstatedir/lib/mandriva/kde-profiles/common/share/icons/
 
 # openoffice mimetypes, see #26311
-mkdir -p %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
-cp -a opendocument-mime/* %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
+mkdir -p %buildroot/%_localstatedir/lib/mandriva/kde-profiles/common/share/mimelnk/application
+cp -a opendocument-mime/* %buildroot/%_localstatedir/lib/mandriva/kde-profiles/common/share/mimelnk/application
 # XXX we have to rename them to the same name provided by kdelibs-common, otherwise the
 # global ones are used.
-pushd %buildroot/%_localstatedir/mandriva/kde-profiles/common/share/mimelnk/application
+pushd %buildroot/%_localstatedir/lib/mandriva/kde-profiles/common/share/mimelnk/application
     mv openoffice.org2.4-oasis-drawing.desktop vnd.oasis.opendocument.graphics.desktop
     mv openoffice.org2.4-oasis-drawing-template.desktop vnd.oasis.opendocument.graphics-template.desktop
     mv openoffice.org2.4-oasis-master-document.desktop vnd.oasis.opendocument.text-master.desktop
@@ -283,23 +283,23 @@ popd
 
 
 for name in flash free one powerpack; do
-    echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
-    echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/mandriva/kde-profiles/$name/kderc
+    echo "[Directories-default]" > %buildroot%_localstatedir/lib/mandriva/kde-profiles/$name/kderc
+    echo "prefixes=/var/lib/mandriva/kde-profiles/common,%_localstatedir/lib/mandriva/kde-profiles/$name" >> %buildroot%_localstatedir/lib/mandriva/kde-profiles/$name/kderc
 	# create the symlink to the desktop data
-    mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop
-    ln -s %_datadir/mdk/desktop/$name %buildroot%_localstatedir/mandriva/kde-profiles/$name/share/apps/kdesktop/DesktopLinks
+    mkdir -p %buildroot%_localstatedir/lib/mandriva/kde-profiles/$name/share/apps/kdesktop
+    ln -s %_datadir/mdk/desktop/$name %buildroot%_localstatedir/lib/mandriva/kde-profiles/$name/share/apps/kdesktop/DesktopLinks
 done
 
 # Upstream
-echo "[Directories-default]" > %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
-echo "prefixes=%{_kde3_prefix}" >> %buildroot%_localstatedir/mandriva/kde-profiles/common/upstream-kde-config
+echo "[Directories-default]" > %buildroot%_localstatedir/lib/mandriva/kde-profiles/common/upstream-kde-config
+echo "prefixes=%{_kde3_prefix}" >> %buildroot%_localstatedir/lib/mandriva/kde-profiles/common/upstream-kde-config
 
 # Bookmarks
-mkdir -p %buildroot%_localstatedir/mandriva/kde-profiles/{free,flash,one,powerpack}/share/apps/konqueror/
-ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-download.xml %buildroot%_localstatedir/mandriva/kde-profiles/free/share/apps/konqueror/bookmarks.xml
-ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/mandriva/kde-profiles/one/share/apps/konqueror/bookmarks.xml
-ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/mandriva/kde-profiles/flash/share/apps/konqueror/bookmarks.xml
-ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-powerpack.xml %buildroot%_localstatedir/mandriva/kde-profiles/powerpack/share/apps/konqueror/bookmarks.xml
+mkdir -p %buildroot%_localstatedir/lib/mandriva/kde-profiles/{free,flash,one,powerpack}/share/apps/konqueror/
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-download.xml %buildroot%_localstatedir/lib/mandriva/kde-profiles/free/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/lib/mandriva/kde-profiles/one/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-one.xml %buildroot%_localstatedir/lib/mandriva/kde-profiles/flash/share/apps/konqueror/bookmarks.xml
+ln -s %_datadir/mdk/bookmarks/konqueror/bookmarks-powerpack.xml %buildroot%_localstatedir/lib/mandriva/kde-profiles/powerpack/share/apps/konqueror/bookmarks.xml
 
 %clean
 rm -rf %buildroot
