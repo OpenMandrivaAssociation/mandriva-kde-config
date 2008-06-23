@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
 Version: 2009.0
-Release: %mkrel 2
+Release: %mkrel 3 
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
