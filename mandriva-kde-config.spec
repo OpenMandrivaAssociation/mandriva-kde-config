@@ -1,5 +1,5 @@
 %define epoch_kdelibs 30000000
-%define source_date 20080514
+%define source_date 20080623 
 
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
