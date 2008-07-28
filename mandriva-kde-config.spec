@@ -4,7 +4,7 @@
 Name: mandriva-kde-config
 Summary: Mandriva KDE configuration
 Version: 2009.0
-Release: %mkrel 3 
+Release: %mkrel 4 
 URL: http://www.mandriva.com
 Group: Graphical desktop/KDE
 BuildRoot: %_tmppath/%name-buildroot
@@ -172,6 +172,7 @@ Summary: Mandriva KDE configuration
 Group: Graphical desktop/KDE
 Provides: kde-config-file = %version-%release
 Requires: mandriva-theme
+Requires: qt4-style-iaora
 Requires: desktop-common-data
 Requires(pre): mandriva-kde-config-common = %version-%release
 Conflicts: kdelibs-common < %epoch_kdelibs:3.5.1
